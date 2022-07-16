@@ -53,13 +53,13 @@ no_t *insere(no_t *no, int chave){
     if (chave < no->chave){
         no->esq = insere(no->esq, chave);
         no->esq->pai = no;
-        no->balanco = 1 + no->esq->balanco;
     } else if (chave >= no->chave){
         no->dir = insere(no->dir, chave);
         no->dir->pai = no;
-        no->balanco = 1 + no->dir->balanco;
     }
 
+    /* Ajusta balanceamento do no */
+    no->balanco = 1 + max(fb(no->esq), fb(no->dir));
 
     /*  Testa o balanceamento */
     bal_test = testa_bal(no);
@@ -83,7 +83,7 @@ no_t *insere(no_t *no, int chave){
         if (bal_filho < 0)
             return rot_esquerda(no); //zig zig
         else{
-            no->esq = rot_direita(no->esq); //zig zag
+            no->dir = rot_direita(no->dir); //zig zag
             return rot_esquerda(no);
         }
     }
@@ -150,7 +150,8 @@ no_t *rot_esquerda(no_t *no){
     }
 
     /* Ajusta balanco */
-    (*no).balanco = q->balanco - 1;
+    no->balanco = 1 + max(fb(no->esq), fb(no->dir));
+    q->balanco = 1 + max(fb(q->esq), fb(q->dir));
 
     /* Retorna o nodo que subiu para a raiz */
     return q;
@@ -177,7 +178,8 @@ no_t *rot_direita(no_t *no){
     }
 
     /* Ajusta balanco */
-    (*no).balanco = q->balanco - 1;
+    no->balanco = 1 + max(fb(no->esq), fb(no->dir));
+    q->balanco = 1 + max(fb(q->esq), fb(q->dir));
 
     /* Retorna o no que subiu para a raiz */
     return q;
@@ -191,7 +193,7 @@ void imprime_arvore(no_t *no, int h){
         return;
 
     imprime_arvore(no->esq, h+1);
-    printf("%d, %d\n", no->chave, h);
+    printf("%d, %d, %d\n", no->chave, h, no->balanco);
     imprime_arvore(no->dir, h+1);
 }
 

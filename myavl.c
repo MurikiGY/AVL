@@ -2,7 +2,7 @@
 
 #include "avl.h"
 
-#define TAM 15
+#define TAM 8
 
 int main(){
     no_t    *root = NULL;       /* Ponteiro da raiz da arvore       */
@@ -20,6 +20,8 @@ int main(){
         if (oper == 'i'){
             root = insere(root, valor);
             tam++;
+            imprime_arvore(root, 0);
+            printf("\n");
         }
 //        else {
 //           if (oper == 'r'){
