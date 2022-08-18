@@ -1,6 +1,6 @@
 CC = gcc
 CCFLAGS = -Wall -g -std=c99		#Flags de compilação
-LDFLAGS = -lm					#Blibliotecas a ligar
+LDFLAGS =   					#Blibliotecas a ligar
 SOURCES = $(wildcard *.c)		#Arquivos .c
 OBJECTS = $(SOURCES: .c=.o)		#Arquivos .o
 TARGET	= myavl					#Executavel
