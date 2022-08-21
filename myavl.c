@@ -6,29 +6,24 @@
 #include "aux.h"
 
 int main(){
-    no_t    *root = NULL;       /* Ponteiro da raiz da arvore       */
-    int     valor;              /* Valor a ser inserido ou removido */
-    char    oper[5];               /* tipo de operação a ser feita     */
+    no_t    *root = NULL;       // Ponteiro da raiz da arvore
+    char    oper;               // tipo de operacao
+    int     valor;              // Valor da operacao
     char    linha[10];
 
-    fgets(linha, 10, stdin);
+    while(scanf("%c %d", &oper, &valor) != EOF){
 
-    while(linha[0] != '\n'){
-
-        strncpy(oper, strtok(linha, " "), 2);
-        valor = atoi(strtok(NULL, " "));
-
-        if (!strcmp(oper, "i")){
+        if (oper == 'i'){
             root = insere(root, valor);
 
-        } else if (!strcmp(oper, "r")){
-           root = (retira(root, valor));
+        } else 
+        if (oper == 'r'){
+            root = (retira(root, valor));
 
         } else
             fprintf(stderr, "Operação invalida\n");
 
-        linha[0] = '\n';
-        fgets(linha, 10, stdin);
+        getchar();
     }
 
     imprime_arvore(root, 0);
