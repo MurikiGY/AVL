@@ -1,2 +1,2 @@
 # AVL
-Implementation of an AVL binary tree in C
+Implementation of an AVL binary tree.
